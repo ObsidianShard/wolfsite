@@ -1,0 +1,7 @@
+# WOLFSKIND Robots.txt
+
+User-agent: *
+Allow: /
+
+# Allow all search engines to crawl the site
+Sitemap: https://wolfsite.vercel.app/sitemap.xml

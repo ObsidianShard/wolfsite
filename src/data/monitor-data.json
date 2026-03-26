@@ -1,0 +1,81 @@
+/**
+ * Monitor Dashboard Placeholder Data
+ * 
+ * Placeholder/demo data for the 4 monitors:
+ * - OpenClaw Dashboard
+ * - Claude Insights  
+ * - Hermes Demo
+ * - Autoresearch Progress
+ */
+
+export const MONITOR_DATA = {
+  // OpenClaw Dashboard
+  openclaw: {
+    title: "OPENCLAW",
+    subtitle: "System Status",
+    metrics: [
+      { label: "Active Sessions", value: "12", change: "+3", trend: "up" },
+      { label: "Agent Count", value: "8", change: "+1", trend: "up" },
+      { label: "Uptime", value: "99.8%", change: "+0.2%", trend: "up" },
+      { label: "Avg Latency", value: "45ms", change: "-5ms", trend: "up" },
+    ],
+    status: "operational",
+    lastUpdated: new Date().toISOString(),
+  },
+
+  // Claude Insights
+  claude: {
+    title: "CLAUDE",
+    subtitle: "API Utilization",
+    metrics: [
+      { label: "Requests/Day", value: "1,234", change: "+12%", trend: "up" },
+      { label: "Avg Response", value: "1.2s", change: "-0.3s", trend: "up" },
+      { label: "Success Rate", value: "99.2%", change: "+0.5%", trend: "up" },
+      { label: "Tokens Used", value: "45K", change: "+8%", trend: "up" },
+    ],
+    insights: [
+      "Top query: AI implementation strategies",
+      "Peak usage: 14:00-16:00 UTC",
+      "Most productive hour: 10:00 UTC",
+    ],
+    status: "operational",
+  },
+
+  // Hermes Demo
+  hermes: {
+    title: "HERMES",
+    subtitle: "Model Performance",
+    metrics: [
+      { label: "Model Version", value: "v2.1", change: "", trend: "neutral" },
+      { label: "Accuracy", value: "87.3%", change: "+2.1%", trend: "up" },
+      { label: "Inference Time", value: "230ms", change: "-15ms", trend: "up" },
+      { label: "Parameters", value: "7B", change: "", trend: "neutral" },
+    ],
+    features: [
+      "Fine-tuning complete",
+      "Research paper integration ready",
+      "Agent performance tracking active",
+    ],
+    status: "operational",
+  },
+
+  // Autoresearch Progress
+  autoresearch: {
+    title: "AUTORESEARCH",
+    subtitle: "Automated Experiments",
+    metrics: [
+      { label: "Active Experiments", value: "5", change: "+2", trend: "up" },
+      { label: "Discoveries", value: "12", change: "+3", trend: "up" },
+      { label: "Avg Runtime", value: "45min", change: "-10min", trend: "up" },
+      { label: "Success Rate", value: "94%", change: "+4%", trend: "up" },
+    ],
+    recentDiscoveries: [
+      "New agent optimization pattern found",
+      "Improved context window utilization",
+      "Enhanced API rate limiting strategy",
+    ],
+    status: "operational",
+  },
+};
+
+export default MONITOR_DATA;

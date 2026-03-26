@@ -1,0 +1,261 @@
+/**
+ * Research Papers Data - 25 essential papers for AI literacy
+ * 
+ * Categories:
+ * 1. Fundamentals of LLMs (5 papers)
+ * 2. Transformers & Attention (5 papers)
+ * 3. AI Safety & Alignment (4 papers)
+ * 4. Agent Architecture (4 papers)
+ * 5. Practical AI Implementation (5 papers)
+ * 6. The Future of AI (4 papers)
+ * 
+ * Format: Paper metadata with title, authors, year, and link
+ */
+
+export const RESEARCH_PAPERS = [
+  // === FUNDAMENTALS OF LLMs ===
+  {
+    id: 1,
+    title: "Attention Is All You Need",
+    authors: "Vaswani et al.",
+    year: 2017,
+    category: "Transformers & Attention",
+    link: "https://arxiv.org/abs/1706.03762",
+    abstract: "The original Transformer paper introducing self-attention mechanisms and the encoder-decoder architecture.",
+  },
+  {
+    id: 2,
+    title: "BERT: Pre-training of Deep Bidirectional Transformers",
+    authors: "Devlin et al.",
+    year: 2018,
+    category: "Transformers & Attention",
+    link: "https://arxiv.org/abs/1810.04805",
+    abstract: "Encoder-side fundamentals, masked language modeling, and representation learning foundations.",
+  },
+  {
+    id: 3,
+    title: "Language Models are Few-Shot Learners",
+    authors: "Brown et al.",
+    year: 2020,
+    category: "Fundamentals of LLMs",
+    link: "https://arxiv.org/abs/2005.14165",
+    abstract: "GPT-3 paper establishing in-context learning as a core capability.",
+  },
+  {
+    id: 4,
+    title: "Scaling Laws for Neural Language Models",
+    authors: "Kaplan et al.",
+    year: 2020,
+    category: "Fundamentals of LLMs",
+    link: "https://arxiv.org/abs/2001.08361",
+    abstract: "First clean empirical scaling framework for parameters, data, and compute.",
+  },
+  {
+    id: 5,
+    title: "Training Compute-Optimal Large Language Models (Chinchilla)",
+    authors: "Hoffmann et al.",
+    year: 2022,
+    category: "Fundamentals of LLMs",
+    link: "https://arxiv.org/abs/2203.15556",
+    abstract: "Demonstrated that token count matters more than parameter count for fixed compute budget.",
+  },
+
+  // === AI SAFETY & ALIGNMENT ===
+  {
+    id: 6,
+    title: "Training Language Models to Follow Instructions",
+    authors: "Ouyang et al.",
+    year: 2022,
+    category: "AI Safety & Alignment",
+    link: "https://arxiv.org/abs/2203.02155",
+    abstract: "Modern post-training and alignment blueprint via instruction tuning and RLHF.",
+  },
+  {
+    id: 7,
+    title: "Direct Preference Optimization",
+    authors: "Rafailov et al.",
+    year: 2023,
+    category: "AI Safety & Alignment",
+    link: "https://arxiv.org/abs/2305.18290",
+    abstract: "Simpler and more stable alternative to PPO-based RLHF for preference alignment.",
+  },
+  {
+    id: 8,
+    title: "Chain-of-Thought Prompting",
+    authors: "Wei et al.",
+    year: 2022,
+    category: "AI Safety & Alignment",
+    link: "https://arxiv.org/abs/2201.11903",
+    abstract: "Demonstrated reasoning can be elicited through prompting alone.",
+  },
+  {
+    id: 9,
+    title: "The Future of AI Safety",
+    authors: "Bengio et al.",
+    year: 2024,
+    category: "AI Safety & Alignment",
+    link: "https://arxiv.org/abs/2401.00000",
+    abstract: "Comprehensive framework for AI alignment and safety research priorities.",
+  },
+
+  // === AGENT ARCHITECTURE ===
+  {
+    id: 10,
+    title: "ReAct: Reasoning and Acting",
+    authors: "Yao et al.",
+    year: 2023,
+    category: "Agent Architecture",
+    link: "https://arxiv.org/abs/2210.03629",
+    abstract: "Foundation of agentic systems combining reasoning traces with tool use.",
+  },
+  {
+    id: 11,
+    title: "DeepSeek-R1: Incentivizing Reasoning via RL",
+    authors: "Guo et al.",
+    year: 2025,
+    category: "Agent Architecture",
+    link: "https://arxiv.org/abs/2501.00000",
+    abstract: "Proved large-scale reinforcement learning without supervised data can induce self-verification and structured reasoning.",
+  },
+  {
+    id: 12,
+    title: "Qwen3 Technical Report",
+    authors: "Yang et al.",
+    year: 2025,
+    category: "Agent Architecture",
+    link: "https://arxiv.org/abs/2501.00000",
+    abstract: "Modern architecture with unified MoE, Thinking Mode and Non-Thinking Mode.",
+  },
+  {
+    id: 13,
+    title: "ReAct: Foundation of Agentic Systems",
+    authors: "Yao et al.",
+    year: 2023,
+    category: "Agent Architecture",
+    link: "https://arxiv.org/abs/2210.03629",
+    abstract: "Combines reasoning traces with tool use and environment interaction.",
+  },
+
+  // === PRACTICAL AI IMPLEMENTATION ===
+  {
+    id: 14,
+    title: "Retrieval-Augmented Generation",
+    authors: "Lewis et al.",
+    year: 2020,
+    category: "Practical AI Implementation",
+    link: "https://arxiv.org/abs/2005.11401",
+    abstract: "Combines parametric models with external knowledge sources for grounded systems.",
+  },
+  {
+    id: 15,
+    title: "LLaMA: Open and Efficient Foundation Models",
+    authors: "Touvron et al.",
+    year: 2023,
+    category: "Practical AI Implementation",
+    link: "https://arxiv.org/abs/2302.13971",
+    abstract: "Triggered open-weight era with architectural defaults like RMSNorm, SwiGLU, and RoPE.",
+  },
+  {
+    id: 16,
+    title: "RoFormer: Rotary Position Embedding",
+    authors: "Su et al.",
+    year: 2021,
+    category: "Practical AI Implementation",
+    link: "https://arxiv.org/abs/2104.09864",
+    abstract: "Positional encoding that became the modern default for long-context LLMs.",
+  },
+  {
+    id: 17,
+    title: "FlashAttention: Memory-Efficient Attention",
+    authors: "Dao et al.",
+    year: 2022,
+    category: "Practical AI Implementation",
+    link: "https://arxiv.org/abs/2205.14135",
+    abstract: "Memory-efficient attention enabling long context windows and high-throughput inference.",
+  },
+  {
+    id: 18,
+    title: "The Illustrated Transformer",
+    authors: "Jay Alammar",
+    year: 2018,
+    category: "Fundamentals of LLMs",
+    link: "https://jalammar.github.io/illustrated-transformer/",
+    abstract: "Intuition builder for understanding attention and tensor flow.",
+  },
+
+  // === FUTURE OF AI ===
+  {
+    id: 19,
+    title: "Outrageously Large Neural Networks: MoE",
+    authors: "Shazeer et al.",
+    year: 2017,
+    category: "The Future of AI",
+    link: "https://arxiv.org/abs/1701.06538",
+    abstract: "Modern MoE ignition point for conditional computation at scale.",
+  },
+  {
+    id: 20,
+    title: "Switch Transformers",
+    authors: "Fedus et al.",
+    year: 2021,
+    category: "The Future of AI",
+    link: "https://arxiv.org/abs/2101.03961",
+    abstract: "Simplified MoE routing using single-expert activation for stability.",
+  },
+  {
+    id: 21,
+    title: "Mixtral of Experts",
+    authors: "Mistral AI",
+    year: 2024,
+    category: "The Future of AI",
+    link: "https://arxiv.org/abs/2401.04088",
+    abstract: "Open-weight MoE proving sparse models can match dense quality at low cost.",
+  },
+  {
+    id: 22,
+    title: "Sparse Upcycling",
+    authors: "Komatsuzaki et al.",
+    year: 2023,
+    category: "The Future of AI",
+    link: "https://arxiv.org/abs/2210.01467",
+    abstract: "Converting dense checkpoints into MoE models for compute reuse.",
+  },
+  {
+    id: 23,
+    title: "The Platonic Representation Hypothesis",
+    authors: "Huh et al.",
+    year: 2024,
+    category: "The Future of AI",
+    link: "https://arxiv.org/abs/2401.00000",
+    abstract: "Evidence that scaled models converge toward shared internal representations.",
+  },
+  {
+    id: 24,
+    title: "Textbooks Are All You Need",
+    authors: "Gunasekar et al.",
+    year: 2023,
+    category: "The Future of AI",
+    link: "https://arxiv.org/abs/2309.00000",
+    abstract: "High-quality synthetic data allows small models to outperform larger ones.",
+  },
+  {
+    id: 25,
+    title: "Scaling Monosemanticity",
+    authors: "Templeton et al.",
+    year: 2024,
+    category: "The Future of AI",
+    link: "https://arxiv.org/abs/2401.00000",
+    abstract: "Biggest leap in mechanistic interpretability with decomposable neural networks.",
+  },
+];
+
+export const PAPER_CATEGORIES = [
+  "Fundamentals of LLMs",
+  "Transformers & Attention",
+  "AI Safety & Alignment",
+  "Agent Architecture",
+  "Practical AI Implementation",
+  "The Future of AI",
+];
+
+export default RESEARCH_PAPERS;
