@@ -3,20 +3,31 @@
  */
 
 import { useRef, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import * as THREE from 'three';
 
 export function Scene3NeTokyo() {
-  const cityGroupRef = useRef(null);
-  const buildingGroupRef = useRef(null);
+  return (
+    <section className="scene scene-3" style={{ position: 'relative', width: '100%', minHeight: '100vh', background: '#0a0a1a' }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
+        <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
+          <NeoTokyoCity />
+        </Canvas>
+      </div>
+    </section>
+  );
+}
 
-  const cityColors = useMemo(() => ({
-    neonRed: '#ff0055',
-    neonCyan: '#00f5ff',
-    neonMagenta: '#ff00ff',
-    darkShadow: '#0a0a1a',
-    accentGold: '#ffd700',
-  }), []);
+const cityColors = {
+  neonRed: '#ff0055',
+  neonCyan: '#00f5ff',
+  neonMagenta: '#ff00ff',
+  darkShadow: '#0a0a1a',
+  accentGold: '#ffd700',
+};
+
+function NeoTokyoCity() {
+  const cityGroupRef = useRef(null);
 
   useFrame(({ clock }) => {
     if (!cityGroupRef.current) return;
@@ -26,30 +37,21 @@ export function Scene3NeTokyo() {
   });
 
   return (
-    <section className="scene scene-3" style={{ position: 'relative', width: '100%', minHeight: '100vh', background: '#0a0a1a' }}>
-      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-        <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
-          <ambientLight intensity={0.3} color="#ff00ff" />
-          <group ref={cityGroupRef} position={[0, -10, 0]}>
-            <group ref={buildingGroupRef}>
-              <Building position={[-40, 5, 0]} height={25} color={cityColors.neonCyan} emissive={cityColors.neonCyan} />
-              <Building position={[-25, 8, 0]} height={30} color={cityColors.neonRed} emissive={cityColors.neonRed} />
-              <Building position={[-10, 6, 0]} height={22} color={cityColors.neonMagenta} emissive={cityColors.neonMagenta} />
-              <Building position={[5, 10, 0]} height={35} color={cityColors.neonCyan} emissive={cityColors.neonCyan} />
-              <Building position={[20, 7, 0]} height={28} color={cityColors.neonRed} emissive={cityColors.neonRed} />
-              <Building position={[35, 9, 0]} height={32} color={cityColors.neonMagenta} emissive={cityColors.neonMagenta} />
-              <mesh position={[0, -12, 0]} rotation={[Math.PI / 2, 0, 0]}>
-                <planeGeometry args={[200, 100]} />
-                <meshStandardMaterial color="#0a0a0a" roughness={0.1} metalness={0.8} />
-              </mesh>
-              <pointLight position={[0, -8, 0]} intensity={0.5} color={cityColors.neonCyan} />
-              <pointLight position={[-30, -8, 0]} intensity={0.3} color={cityColors.neonRed} />
-              <pointLight position={[30, -8, 0]} intensity={0.3} color={cityColors.neonMagenta} />
-            </group>
-          </group>
-        </Canvas>
-      </div>
-    </section>
+    <group ref={cityGroupRef} position={[0, -10, 0]}>
+      <Building position={[-40, 5, 0]} height={25} color={cityColors.neonCyan} emissive={cityColors.neonCyan} />
+      <Building position={[-25, 8, 0]} height={30} color={cityColors.neonRed} emissive={cityColors.neonRed} />
+      <Building position={[-10, 6, 0]} height={22} color={cityColors.neonMagenta} emissive={cityColors.neonMagenta} />
+      <Building position={[5, 10, 0]} height={35} color={cityColors.neonCyan} emissive={cityColors.neonCyan} />
+      <Building position={[20, 7, 0]} height={28} color={cityColors.neonRed} emissive={cityColors.neonRed} />
+      <Building position={[35, 9, 0]} height={32} color={cityColors.neonMagenta} emissive={cityColors.neonMagenta} />
+      <mesh position={[0, -12, 0]} rotation={[Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[200, 100]} />
+        <meshStandardMaterial color="#0a0a0a" roughness={0.1} metalness={0.8} />
+      </mesh>
+      <pointLight position={[0, -8, 0]} intensity={0.5} color={cityColors.neonCyan} />
+      <pointLight position={[-30, -8, 0]} intensity={0.3} color={cityColors.neonRed} />
+      <pointLight position={[30, -8, 0]} intensity={0.3} color={cityColors.neonMagenta} />
+    </group>
   );
 }
 
