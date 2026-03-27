@@ -1,7 +1,3 @@
-/**
- * Scene 3: Neo-Tokyo Skyline
- */
-
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import * as THREE from 'three';
@@ -29,6 +25,7 @@ const cityColors = {
 function NeoTokyoCity() {
   const cityGroupRef = useRef(null);
 
+  // useFrame INSIDE Canvas descendant - fixed!
   useFrame(({ clock }) => {
     if (!cityGroupRef.current) return;
     const time = clock.getElapsedTime();

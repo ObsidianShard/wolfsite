@@ -1,12 +1,3 @@
-import { useRef, useMemo, useEffect } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
-import * as THREE from 'three';
-import { useScrollPosition } from '../../hooks/useScrollPosition';
-import { Logo } from '../../components/ui/Logo';
-import { generateAsciiTrail, createEarthTexture } from '../../utils/ascii-art';
-import { sceneAnimations } from '../../scenes/earth.scene';
-
 /**
  * Scene1-Earth.jsx - First parallax scene (Earth from Orbit)
  * 
@@ -19,10 +10,19 @@ import { sceneAnimations } from '../../scenes/earth.scene';
  * - Subtle animations that feel meditative and awe-inspiring
  * - Neon cyan/magenta WOLFSKIND logo fades in elegantly
  */
+import { useRef, useMemo, useEffect } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
+import * as THREE from 'three';
+import { useScrollPosition } from '../../hooks/useScrollPosition';
+import { Logo } from '../../components/ui/Logo';
+import { generateAsciiTrail, createEarthTexture } from '../../utils/ascii-art';
+import { sceneAnimations } from '../../scenes/earth.scene';
+
 export function Scene1Earth() {
   const scroll = useScrollPosition();
   const sceneRef = useRef(null);
-  
+
   return (
     <section 
       className="scene scene-1"
@@ -100,7 +100,6 @@ export function Scene1Earth() {
           text-align: center;
         }
         
-        /* Subtle star background */
         .scene-1::before {
           content: '';
           position: absolute;
@@ -126,18 +125,12 @@ export function Scene1Earth() {
 
 /**
  * EarthGlobe - Three.js 3D globe component
- * 
- * Renders a realistic-looking Earth with:
- * - Procedural blue/green earth texture
- * - Ambient + directional lighting for depth
- * - Auto-rotation
- * - Atmospheric glow effect
+ * MUST be inside <Canvas> for useFrame to work
  */
 function EarthGlobe() {
   const meshRef = useRef(null);
   const glowRef = useRef(null);
   
-  // Create procedural earth texture
   const earthTexture = useMemo(() => {
     const canvas = createEarthTexture(512, 256);
     const texture = new THREE.CanvasTexture(canvas);
@@ -147,13 +140,12 @@ function EarthGlobe() {
     return texture;
   }, []);
   
+  // useFrame INSIDE Canvas descendant - fixed!
   useFrame(({ clock }) => {
-    // Slow, meditative rotation
     if (meshRef.current) {
       meshRef.current.rotation.y += 0.001;
     }
     
-    // Subtle pulsing for atmosphere
     if (glowRef.current) {
       const time = clock.getElapsedTime();
       const scale = 1.05 + Math.sin(time * 0.5) * 0.02;
@@ -163,7 +155,6 @@ function EarthGlobe() {
   
   return (
     <group>
-      {/* Main Earth sphere */}
       <mesh ref={meshRef}>
         <sphereGeometry args={[1, 64, 64]} />
         <meshPhongMaterial
@@ -175,7 +166,6 @@ function EarthGlobe() {
         />
       </mesh>
       
-      {/* Atmospheric glow */}
       <mesh ref={glowRef} scale={[1.2, 1.2, 1.2]}>
         <sphereGeometry args={[1, 64, 64]} />
         <meshBasicMaterial
@@ -187,7 +177,6 @@ function EarthGlobe() {
         />
       </mesh>
       
-      {/* Horizon line glow */}
       <mesh rotation={[Math.PI / 2, 0, 0]}>
         <ringGeometry args={[1, 1.01, 64]} />
         <meshBasicMaterial
@@ -202,12 +191,6 @@ function EarthGlobe() {
   );
 }
 
-/**
- * AsciiOverlay - ASCII motion blur overlay
- * 
- * Creates a canvas overlay with moving ASCII characters
- * that simulate motion blur across the globe
- */
 function AsciiOverlay({ scroll }) {
   const canvasRef = useRef(null);
   
@@ -218,7 +201,6 @@ function AsciiOverlay({ scroll }) {
     const ctx = canvas.getContext('2d');
     const container = canvas.parentElement;
     
-    // Set canvas size
     const resize = () => {
       canvas.width = container.offsetWidth;
       canvas.height = container.offsetHeight;
@@ -234,18 +216,15 @@ function AsciiOverlay({ scroll }) {
       const deltaTime = time - lastTime;
       lastTime = time;
       
-      // Clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Generate ASCII trail based on scroll position
       const asciiRows = generateAsciiTrail(
-        scroll.scrollY / 100, // Normalize scroll
-        0.5, // Density
-        40, // Width
-        20   // Height
+        scroll.scrollY / 100,
+        0.5,
+        40,
+        20
       );
       
-      // Render each row with varying opacity
       asciiRows.forEach((row, rowIndex) => {
         ctx.fillStyle = '#00ffff';
         ctx.font = '12px monospace';

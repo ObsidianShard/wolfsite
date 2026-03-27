@@ -1,7 +1,3 @@
-/**
- * Scene 4: PEPE on the Cliff
- */
-
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
@@ -11,12 +7,6 @@ import { FileCabinet } from '../common/FileCabinet';
 
 export function Scene4PEPEScene() {
   const cliffGroupRef = useRef(null);
-
-  useFrame(({ clock }) => {
-    if (!cliffGroupRef.current) return;
-    const time = clock.getElapsedTime();
-    cliffGroupRef.current.rotation.y += Math.sin(time * 0.2) * 0.1 * 0.01;
-  });
 
   return (
     <section className="scene scene-4" style={{ position: 'relative', width: '100%', minHeight: '100vh', background: 'linear-gradient(to bottom, #0a0a0f 0%, #2d4a2d 100%)' }}>

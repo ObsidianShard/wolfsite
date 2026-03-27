@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 export function Scene2Atmosphere() {
@@ -36,6 +36,7 @@ export function Scene2Atmosphere() {
 function AnimatedCube() {
   const cubeRef = useRef(null);
 
+  // useFrame INSIDE Canvas descendant - fixed!
   useFrame(({ clock }) => {
     if (cubeRef.current) {
       cubeRef.current.rotation.x = clock.getElapsedTime() * 0.5;
