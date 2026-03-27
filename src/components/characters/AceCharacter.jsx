@@ -62,6 +62,7 @@ export function AceCharacter({
     legWidth: 0.15,
   };
 
+  // useFrame INSIDE Canvas descendant - fixed!
   useFrame(({ clock }) => {
     if (!groupRef.current || !idle) return;
 

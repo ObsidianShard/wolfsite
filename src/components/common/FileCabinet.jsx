@@ -5,13 +5,13 @@
  * Click to view abstract + link
  */
 
-import { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 export function FileCabinet({ position = [0, 0, 0] }) {
   const cabinetRef = useRef(null);
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useFrame(({ clock }) => {
     if (!cabinetRef.current) return;
