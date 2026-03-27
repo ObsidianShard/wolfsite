@@ -19,6 +19,7 @@ export default defineConfig({
   build: {
     target: 'esnext',
     sourcemap: false,
+    manifest: false,
     rollupOptions: {
       output: {
         manualChunks: {
