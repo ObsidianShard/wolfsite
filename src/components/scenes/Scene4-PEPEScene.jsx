@@ -16,12 +16,12 @@ export function Scene4PEPEScene() {
           <pointLight position={[5, 5, 0]} intensity={0.6} color="#ff8c42" />
           <pointLight position={[-5, 5, 0]} intensity={0.4} color="#00f5ff" />
           <group ref={cliffGroupRef} position={[0, -15, 0]}>
-            <Cliff position={[0, -8, 0]} color={0x2d4a2d} grassColor={0x3d6a3d} />
-            <Sea position={[0, -12, 30]} />
-            <DeskSetup position={[2, -6, 5]} />
-            <FileCabinet position={[-3, -7, 6]} />
-            <AceCharacter scale={0.8} idle={true} position={[0, -6, 3]} />
-            <NeoTokyoBackground />
+            <Cliff key="cliff" position={[0, -8, 0]} color={0x2d4a2d} grassColor={0x3d6a3d} />
+            <Sea key="sea" position={[0, -12, 30]} />
+            <DeskSetup key="desk" position={[2, -6, 5]} />
+            <FileCabinet key="cabinet" position={[-3, -7, 6]} />
+            <AceCharacter key="ace" scale={0.8} idle={true} position={[0, -6, 3]} />
+            <NeoTokyoBackground key="neotokyo" />
           </group>
         </Canvas>
       </div>
@@ -30,13 +30,25 @@ export function Scene4PEPEScene() {
 }
 
 function Cliff({ position, color, grassColor }) {
+  const mesh1Ref = useRef(null);
+  const mesh2Ref = useRef(null);
+
+  useFrame(({ clock }) => {
+    if (!mesh1Ref.current || !mesh2Ref.current) return;
+    const time = clock.getElapsedTime();
+    // Subtle rock movement
+    const rotation = Math.sin(time * 0.1) * 0.02;
+    mesh1Ref.current.rotation.y = -Math.PI / 4 + rotation;
+    mesh2Ref.current.rotation.y = -Math.PI / 4 + 0.05 + rotation;
+  });
+
   return (
     <group position={position}>
-      <mesh rotation={[-Math.PI / 4, 0, 0]}>
+      <mesh ref={mesh1Ref} rotation={[-Math.PI / 4, 0, 0]}>
         <planeGeometry args={[50, 30, 10, 10]} />
         <meshStandardMaterial color={color} roughness={0.9} flatShading />
       </mesh>
-      <mesh rotation={[-Math.PI / 4 + 0.05, 0, 0]} position={[0, 0.1, 0]}>
+      <mesh ref={mesh2Ref} rotation={[-Math.PI / 4 + 0.05, 0, 0]} position={[0, 0.1, 0]}>
         <planeGeometry args={[50, 30, 10, 10]} />
         <meshStandardMaterial color={grassColor} roughness={0.7} flatShading />
       </mesh>
@@ -45,9 +57,18 @@ function Cliff({ position, color, grassColor }) {
 }
 
 function Sea({ position }) {
+  const waterRef = useRef(null);
+
+  useFrame(({ clock }) => {
+    if (!waterRef.current) return;
+    const time = clock.getElapsedTime();
+    // Gentle wave motion
+    waterRef.current.position.y = position[1] + Math.sin(time * 0.3) * 0.1;
+  });
+
   return (
     <group position={position}>
-      <mesh rotation={[Math.PI / 2, 0, 0]}>
+      <mesh ref={waterRef} rotation={[Math.PI / 2, 0, 0]}>
         <planeGeometry args={[100, 80, 20, 20]} />
         <meshStandardMaterial color="#1a4a6a" roughness={0.1} metalness={0.6} transparent opacity={0.9} />
       </mesh>
@@ -56,24 +77,32 @@ function Sea({ position }) {
 }
 
 function NeoTokyoBackground() {
+  const buildings = useMemo(() => {
+    return [
+      { pos: [-20, 5, 0], size: [15, 20, 2] },
+      { pos: [-5, 8, 0], size: [12, 25, 2] },
+      { pos: [10, 6, 0], size: [14, 18, 2] },
+      { pos: [25, 7, 0], size: [10, 22, 2] },
+    ];
+  }, []);
+
+  const bgGroupRef = useRef(null);
+
+  useFrame(({ clock }) => {
+    if (!bgGroupRef.current) return;
+    const time = clock.getElapsedTime();
+    // Subtle parallax movement
+    bgGroupRef.current.position.z = -10 + Math.sin(time * 0.1) * 2;
+  });
+
   return (
-    <group position={[0, -10, 50]}>
-      <mesh position={[-20, 5, 0]}>
-        <boxGeometry args={[15, 20, 2]} />
-        <meshBasicMaterial color="#0a0a1a" />
-      </mesh>
-      <mesh position={[-5, 8, 0]}>
-        <boxGeometry args={[12, 25, 2]} />
-        <meshBasicMaterial color="#0a0a1a" />
-      </mesh>
-      <mesh position={[10, 6, 0]}>
-        <boxGeometry args={[14, 18, 2]} />
-        <meshBasicMaterial color="#0a0a1a" />
-      </mesh>
-      <mesh position={[25, 7, 0]}>
-        <boxGeometry args={[10, 22, 2]} />
-        <meshBasicMaterial color="#0a0a1a" />
-      </mesh>
+    <group ref={bgGroupRef} position={[0, -10, 50]}>
+      {buildings.map((building, index) => (
+        <mesh key={index} position={building.pos}>
+          <boxGeometry args={building.size} />
+          <meshBasicMaterial color="#0a0a1a" />
+        </mesh>
+      ))}
       <pointLight position={[-15, 5, 1]} intensity={0.3} color="#00f5ff" />
       <pointLight position={[5, 8, 1]} intensity={0.4} color="#ff0055" />
     </group>
